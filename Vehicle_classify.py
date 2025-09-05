@@ -8,15 +8,14 @@ from ultralytics import YOLO
 import matplotlib.pyplot as plt
 
 IMAGE_SIZE = (224, 224)
-MODEL_PATH = "C:\\Users\\mahir\\OneDrive\\Desktop\\saved_model\\best_model_saved"
+MODEL_PATH = "best_model_saved"
 vehicle_ids = [2, 3, 5, 7]
 
-# ✅ Load SavedModel with TFSMLayer (Keras 3 compatible)
 model = tf.keras.layers.TFSMLayer(MODEL_PATH, call_endpoint="serving_default")
 
 yolo_model = YOLO("yolov8n.pt")
 
-DATASET_DIR = "C:\\Users\\mahir\\OneDrive\\Desktop\\Vehicles complete dataset"
+DATASET_DIR = "Vehicles complete dataset"
 class_names = sorted(os.listdir(DATASET_DIR))
 
 def classify_vehicles(image_path, save_path="output.jpg"):
@@ -46,7 +45,6 @@ def classify_vehicles(image_path, save_path="output.jpg"):
 
         pred_label = class_names[np.argmax(preds)]
 
-        # Draw bounding box + classifier label
         cv2.rectangle(orig_img, (x1, y1), (x2, y2), (0, 255, 0), 2)
         cv2.putText(orig_img, pred_label, (x1, y1 - 10),
                     cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 3)
@@ -59,5 +57,6 @@ def classify_vehicles(image_path, save_path="output.jpg"):
 
     return save_path
 
-input_image = "C:\\Users\\mahir\\OneDrive\\Desktop\\Test3.jpeg"
+input_image = ""
 classify_vehicles(input_image, save_path="classified_output.jpg")
+
