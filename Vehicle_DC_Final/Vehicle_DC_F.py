@@ -28,6 +28,11 @@ class_names = [
     'cars'
 ]
 
+def classify_from_input():
+    img_path = input("Enter the path of the image: ").strip()
+    output_path = classify_vehicles(img_path, save_path="classified_output.jpg")
+    print(f"Classified image saved to: {output_path}")
+
 def classify_vehicles(image_path, save_path="output.jpg"):
     orig_img = cv2.imread(image_path)
     if orig_img is None:
@@ -67,5 +72,4 @@ def classify_vehicles(image_path, save_path="output.jpg"):
 
     return save_path
 
-input_image = ""
-classify_vehicles(input_image, save_path="classified_output.jpg")
+classify_from_input()
